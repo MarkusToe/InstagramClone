@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <title>Instagram Clone</title>
 
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <!-- load bootstrap css -->
+
     {{#if showTests}}
         <link rel="stylesheet" href="/vendor/mocha.css">
     {{/if}}
     <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
 </head>
 <body>
-{{{body}}}
+<div class="container">
+    {{{body}}}
+</div>
 
 {{#if showTests}}
     <div id="mocha"></div>
