@@ -44,7 +44,7 @@ module.exports = function (passport) {
 
             // asynchronous
             process.nextTick(function () {
-                User.findOne({ 'local.email': email }, function (err, user) {
+                User.findOne({ 'email': email }, function (err, user) {
                     // if there are any errors, return the error
                     if (err)
                         return done(err);
@@ -94,8 +94,12 @@ module.exports = function (passport) {
                             // create the user
                             var newUser = new User();
 
-                            newUser.local.email = email;
-                            newUser.local.password = newUser.generateHash(password);
+                            newUser.email = email;
+                            newUser.password = newUser.generateHash(password);
+
+                            var ind = email.indexOf("@");
+                            var username = email.slice(0, ind);
+                            newUser.username = username;
 
                             newUser.save(function (err) {
                                 if (err)
