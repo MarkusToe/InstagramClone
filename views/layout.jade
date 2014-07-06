@@ -3,8 +3,7 @@ html
     head
         title #{title} - My Site
         link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css')
-        script(src="bower_components/angular/angular.js")
-    body(ng-app='')
+    body(ng-app='instagramclone' ng-controller="AppCtrl as app")
         .navbar
             .container
                 ul.nav.navbar-nav
@@ -16,3 +15,5 @@ html
                         a(href="/signup") Signup
         .container
             block content
+        script(src="bower_components/angular/angular.js")
+        script(src="/js/app.js")

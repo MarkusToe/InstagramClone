@@ -8,6 +8,7 @@ var flash = require("connect-flash");
 var fs = require("fs");
 var multer = require("multer");
 var imagemagick = require("imagemagick");
+var cors = require("cors");
 
 var morgan = require("morgan");
 var cookieParser = require('cookie-parser');
@@ -26,6 +27,7 @@ app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser()); // get information from html forms
 app.use(express.static(__dirname + '/public'));
 app.use(multer({dest: "./public/uploads/fullsize/"}));
+app.use(cors());
 
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jade')
