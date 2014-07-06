@@ -7,6 +7,7 @@ var passport = require("passport");
 var flash = require("connect-flash");
 var fs = require("fs");
 var multer = require("multer");
+var imagemagick = require("imagemagick");
 
 var morgan = require("morgan");
 var cookieParser = require('cookie-parser');
@@ -24,7 +25,7 @@ app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser()); // get information from html forms
 app.use(express.static(__dirname + '/public'));
-app.use(multer({ dest: './public/uploads/'}))
+app.use(multer({dest: "./public/uploads/fullsize/"}));
 
 // set up handlebars view engine
 var handlebars = require('express3-handlebars').create({defaultLayout: 'main'});
@@ -38,7 +39,7 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
-require('./lib/routes.js')(app, passport, fs); // load our routes and pass in our app and fully configured passport
+require('./lib/routes.js')(app, passport, multer, fs, imagemagick); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
 app.listen(port);
