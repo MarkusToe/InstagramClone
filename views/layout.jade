@@ -1,0 +1,18 @@
+doctype html
+html
+    head
+        title #{title} - My Site
+        link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css')
+        script(src="bower_components/angular/angular.js")
+    body(ng-app='')
+        .navbar
+            .container
+                ul.nav.navbar-nav
+                    li
+                        a(href="/") Home
+                    li
+                        a(href="/login") Login
+                    li
+                        a(href="/signup") Signup
+        .container
+            block content

@@ -7,12 +7,10 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <!-- load bootstrap css -->
 
-    {{#if showTests}}
-        <link rel="stylesheet" href="/vendor/mocha.css">
-    {{/if}}
     <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
 </head>
-<body>
+<body ng-app="">
 <div class="navbar">
     <div class="container">
         <ul class="nav navbar-nav">
@@ -22,22 +20,9 @@
     </div>
 </div>
 <div class="container">
-    {{{body}}}
+    <h1>Profile Page</h1>
 </div>
 
-{{#if showTests}}
-    <div id="mocha"></div>
-    <script src="/vendor/mocha.js"></script>
-    <script src="/vendor/chai.js"></script>
-    <script>
-        mocha.ui('tdd');
-        var assert = chai.assert;
-    </script>
-    <script src="/qa/tests-global.js"></script>
-    {{#if pageTestScript}}
-        <script src="{{pageTestScript}}"></script>
-    {{/if}}
-    <script>mocha.run();</script>
-{{/if}}
+
 </body>
 </html>
