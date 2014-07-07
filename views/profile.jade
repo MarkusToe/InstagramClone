@@ -8,7 +8,7 @@ block content
                 input(type="file" id="fieldImage" name="image" accept="image/*")
             button(type="submit" class="btn btn-default") Submit
     if loggedIn == true && ownPage == false
-        a(href="#") Follow Me
+        a(href="/follow/#{username}") Follow Me
     ul
         for image in images
             li
