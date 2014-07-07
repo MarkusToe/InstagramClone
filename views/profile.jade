@@ -1,11 +1,14 @@
 extend layout
 block content
     h1 Profile Page #{username}
-    form(action="/upload" method="post" enctype="multipart/form-data" role="form")
-        .form-group
-            label(for="fieldImage") Image:
-            input(type="file" id="fieldImage" name="image" accept="image/*")
-        button(type="submit" class="btn btn-default") Submit
+    if ownPage == true
+        form(action="/upload" method="post" enctype="multipart/form-data" role="form")
+            .form-group
+                label(for="fieldImage") Image:
+                input(type="file" id="fieldImage" name="image" accept="image/*")
+            button(type="submit" class="btn btn-default") Submit
+    if loggedIn == true && ownPage == false
+        a(href="#") Follow Me
     ul
         for image in images
             li
