@@ -4,14 +4,14 @@ html
         title #{title} - My Site
         link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css')
     body(ng-app='instagramclone' ng-controller="AppCtrl as app")
-        .navbar
-            .container
-                ul.nav.navbar-nav
+        .container
+            .header
+                ul.nav.nav-pills.pull-right
                     li
-                        a(href="/") Home
+                        a.active(href="/") Home
                     if user
                         li
-                            a(href='/profile') Dashbaord
+                            a(href='/profile') #{user.username}
                         li
                             a(href='/logout') Logout
                     else
@@ -19,7 +19,10 @@ html
                             a(href="/login") Login
                         li
                             a(href="/signup") Signup
-        .container
-            block content
+                h3.text-muted Instagram Clone
+            .jumbotron
+                block content
+            .footer
+                © Company 2014
         script(src="bower_components/angular/angular.js")
         script(src="/js/app.js")

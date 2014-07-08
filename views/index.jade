@@ -1,6 +1,9 @@
 extend layout
 block content
-    ul
+    ul.list-unstyled
         li(ng-repeat="image in app.images")
             a(href="{{image.fullSizePath}}")
                 img(src="{{image.thumbPath}}")
+            p
+                | Uploaded by
+                a(href="/profile/{{image.user_name}}") {{image.user_name}}

@@ -1,6 +1,6 @@
 extend layout
 block content
-    h1 Profile Page #{username}
+    h2 Profile Page #{username}
     if ownPage == true
         form(action="/upload" method="post" enctype="multipart/form-data" role="form")
             .form-group
@@ -9,8 +9,11 @@ block content
             button(type="submit" class="btn btn-default") Submit
     if loggedIn == true && ownPage == false
         a(href="/follow/#{username}") Follow Me
-    ul
+    ul.list-unstyled
         for image in images
             li
                 a(href="#{image.fullSizePath}")
                     img(src="#{image.thumbPath}")
+                p
+                    | Uploaded by
+                    a(href="/profile/#{image.user_name}") #{image.user_name}
