@@ -14,6 +14,9 @@ block content
             li
                 a(href="#{image.fullSizePath}")
                     img(src="#{image.thumbPath}")
-                p
-                    | Uploaded by
-                    a(href="/profile/#{image.user_name}") #{image.user_name}
+    script.
+        var socket = io.connect('http://localhost');
+        socket.on('news', function (data) {
+          console.log(data);
+          socket.emit('my other event', { my: 'data' });
+        });

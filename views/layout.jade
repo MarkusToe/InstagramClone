@@ -3,6 +3,29 @@ html
     head
         title #{title} - My Site
         link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css')
+        script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+        script(src="/js/socket.io.js")
+        script.
+            $(function(){
+                var socket = io.connect('http://localhost:3000/');
+                var images = [];
+                    socket.on('new-image', function(data) {
+                    //if(data.image) {
+                        console.log('new image');
+                        console.log(data);
+                        images.push(data.image);
+                        var html = '';
+                        for(var i=0; i<images.length; i++) {
+                            html += "<li>"
+                            + "<a href=\"/uploads/fullsize/" + images[i] + "\">"
+                            + "<img src=\"/uploads/thumbs/" + images[i] + "\" />"
+                            + "</a></li>";
+                        }
+                        $('.image-list').append(html);
+                    //}
+                });
+            });
+
     body(ng-app='instagramclone' ng-controller="AppCtrl as app")
         .container
             .header
@@ -23,6 +46,6 @@ html
             .jumbotron
                 block content
             .footer
-                © Company 2014
+                p © Company 2014
         script(src="bower_components/angular/angular.js")
         script(src="/js/app.js")
