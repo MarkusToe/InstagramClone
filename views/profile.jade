@@ -9,7 +9,13 @@ block content
             button(type="submit" class="btn btn-default") Submit
     if loggedIn == true && ownPage == false
         a(href="/follow/#{username}") Follow Me
-    ul.list-unstyled
+    if (friends)
+        h3 Friend List
+        ul.friends
+            for friend in friends
+                li
+                    a(href="/profile/#{friend}") #{friend}
+    ul.list-unstyled.image-list
         for image in images
             li
                 a(href="#{image.fullSizePath}")

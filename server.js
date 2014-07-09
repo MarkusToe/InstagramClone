@@ -65,6 +65,9 @@ console.log('The magic happens on port ' + port);
 var rabbitMq = amqp.createConnection({ host: 'localhost' });
 
 rabbitMq.on('ready', function () {
+
+    console.log("RabbitMQ connected!");
+
     io.sockets.on('connection', function (socket) {
 
         console.log("Sockets connected!");
@@ -72,9 +75,8 @@ rabbitMq.on('ready', function () {
         rabbitMq.queue('my-queue', function (q) {
             q.bind("image-resize-exchange", "#");
             q.subscribe(function (message) {
-                console.log("Received a message on server:");
-                console.log(message.imageName);
-                socket.emit('new-image', { image: message.imageName });
+                console.log(message);
+                io.sockets.emit('new-image', { image: message.imageName, user: message.user_name });
             })
         });
     });

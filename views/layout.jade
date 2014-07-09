@@ -8,21 +8,22 @@ html
         script.
             $(function(){
                 var socket = io.connect('http://localhost:3000/');
-                var images = [];
-                    socket.on('new-image', function(data) {
-                    //if(data.image) {
-                        console.log('new image');
-                        console.log(data);
-                        images.push(data.image);
-                        var html = '';
-                        for(var i=0; i<images.length; i++) {
-                            html += "<li>"
-                            + "<a href=\"/uploads/fullsize/" + images[i] + "\">"
-                            + "<img src=\"/uploads/thumbs/" + images[i] + "\" />"
-                            + "</a></li>";
-                        }
-                        $('.image-list').append(html);
-                    //}
+                socket.on('new-image', function(data) {
+                    console.log('new image from: ');
+                    console.log(data.user);
+                    // images.push(data.image);
+                    var html = '';
+
+                    html += "<li>"
+                    + "<a href=\"/uploads/fullsize/" + data.image + "\">"
+                    + "<img src=\"/uploads/thumbs/" + data.image + "\" />"
+                    + "</a></li>";
+
+                    // var friends = #{friends}
+
+                    // console.log(friends);
+
+                    $('.image-list').append(html);
                 });
             });
 
