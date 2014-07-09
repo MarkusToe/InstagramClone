@@ -19,11 +19,15 @@ html
                     + "<img src=\"/uploads/thumbs/" + data.image + "\" />"
                     + "</a></li>";
 
-                    var friends = #{friends}
+                    var users = jQuery(jQuery('.friends')[0]).find('a');
+                    var allusers = [];
+                    for(var i = 0; i < users.length; i++){
+                        allusers.push(users[i].text);
+                    }
 
-                    console.log(friends);
-
-                    $('.image-list').append(html);
+                    if($.inArray(data.user, allusers) != -1) {
+                        $('.image-list').append(html);
+                    }
                 });
             });
 

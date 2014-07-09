@@ -1,6 +1,8 @@
 extend layout
 block content
-    ul.list-unstyled.image-list
-        li(ng-repeat="image in app.images")
-            a(href="{{image.fullSizePath}}")
-                img(src="{{image.thumbPath}}")
+    if(images)
+        ul.list-unstyled.image-list
+            for image in images
+                li
+                    a(href="#{image.fullSizePath}")
+                        img(src="#{image.thumbPath}")
