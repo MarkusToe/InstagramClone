@@ -24,6 +24,7 @@ var configDB = require('./config/database.js');
 mongoose.connect(configDB.url);
 
 require('./config/passport')(passport); // pass passport for configuration
+var User = require('./lib/models/user');
 
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
@@ -75,7 +76,13 @@ rabbitMq.on('ready', function () {
         rabbitMq.queue('my-queue', function (q) {
             q.bind("image-resize-exchange", "#");
             q.subscribe(function (message) {
-                console.log(message);
+                console.log(message.user_name);
+
+                User.find({ friends: { "$in": [message.user_name] } }, function (err, results) {
+                    console.log("Friends:");
+                    console.log(results);
+                });
+
                 io.sockets.emit('new-image', { image: message.imageName, user: message.user_name });
             })
         });
