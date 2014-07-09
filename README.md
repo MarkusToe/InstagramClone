@@ -12,3 +12,5 @@ You can register new Users via the Signup Link in the Menu-Bar. After registrati
 Here you can upload new pictures.
 To follow a registered User you can go to his profile site under `http://localhost:3000/profile/username`.
 There you will find a link that says "Follow me".
+
+To make sure that the file-uploads work you should check if there is a "fullsize" and a "thumbs" folder in "/public/uploads".

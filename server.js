@@ -68,13 +68,7 @@ var rabbitMq = amqp.createConnection({ host: 'localhost' });
 var clients = {};
 
 rabbitMq.on('ready', function () {
-
-    console.log("RabbitMQ connected!");
-
     io.sockets.on('connection', function (socket) {
-
-        clients[socket.id] = socket;
-
         rabbitMq.queue('my-queue', function (q) {
             q.bind("image-resize-exchange", "#");
             q.subscribe(function (message) {
