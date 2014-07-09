@@ -75,8 +75,6 @@ rabbitMq.on('ready', function () {
 
         clients[socket.id] = socket;
 
-        console.log("Sockets connected!");
-
         rabbitMq.queue('my-queue', function (q) {
             q.bind("image-resize-exchange", "#");
             q.subscribe(function (message) {
