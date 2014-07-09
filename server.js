@@ -56,7 +56,7 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
-require('./lib/routes.js')(app, passport, multer, fs, imagemagick, rabbitMq); // load our routes and pass in our app and fully configured passport
+require('./lib/routes.js')(app, passport, multer, fs, imagemagick, rabbitMq, io); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
 server.listen(port);
@@ -65,11 +65,15 @@ console.log('The magic happens on port ' + port);
 // socket.io ===================================================================
 var rabbitMq = amqp.createConnection({ host: 'localhost' });
 
+var clients = {};
+
 rabbitMq.on('ready', function () {
 
     console.log("RabbitMQ connected!");
 
     io.sockets.on('connection', function (socket) {
+
+        clients[socket.id] = socket;
 
         console.log("Sockets connected!");
 
@@ -78,6 +82,7 @@ rabbitMq.on('ready', function () {
             q.subscribe(function (message) {
                 console.log(message.user_name);
 
+                // get all users where uploading user is in friends-list
                 User.find({ friends: { "$in": [message.user_name] } }, function (err, results) {
                     console.log("Friends:");
                     console.log(results);
