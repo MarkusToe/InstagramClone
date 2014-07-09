@@ -80,12 +80,11 @@ rabbitMq.on('ready', function () {
         rabbitMq.queue('my-queue', function (q) {
             q.bind("image-resize-exchange", "#");
             q.subscribe(function (message) {
-                console.log(message.user_name);
 
                 // get all users where uploading user is in friends-list
                 User.find({ friends: { "$in": [message.user_name] } }, function (err, results) {
-                    console.log("Friends:");
-                    console.log(results);
+//                    console.log("Friends:");
+//                    console.log(results);
                 });
 
                 io.sockets.emit('new-image', { image: message.imageName, user: message.user_name });

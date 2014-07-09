@@ -1,5 +1,10 @@
 extend layout
 block content
+    if (friends)
+        ul.friends(style="display:none")
+            for friend in friends
+                li
+                    a(href="/profile/#{friend}") #{friend}
     if(images)
         ul.list-unstyled.image-list
             for image in images

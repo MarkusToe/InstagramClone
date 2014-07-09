@@ -2,11 +2,11 @@ extend layout
 block content
     h2 Profile Page #{username}
     if ownPage == true
-        form(action="/upload" method="post" enctype="multipart/form-data" role="form")
+        form(action="/upload" method="post" enctype="multipart/form-data" role="form" id="form")
             .form-group
                 label(for="fieldImage") Image:
                 input(type="file" id="fieldImage" name="image" accept="image/*")
-            button(type="submit" class="btn btn-default") Submit
+            input(type="submit" class="btn btn-default" value="Submit" name="Submit")
     if loggedIn == true && ownPage == false
         a(href="/follow/#{username}") Follow Me
     if (friends)
@@ -21,8 +21,10 @@ block content
                 a(href="#{image.fullSizePath}")
                     img(src="#{image.thumbPath}")
     script.
-        var socket = io.connect('http://localhost');
-        socket.on('news', function (data) {
-          console.log(data);
-          socket.emit('my other event', { my: 'data' });
+        $('#form').submit(function() {
+
+            $(this).ajaxSubmit(
+                {clearForm: true}
+            );
+            return false;
         });

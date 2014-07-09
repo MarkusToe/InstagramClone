@@ -4,14 +4,12 @@ html
         title #{title} - My Site
         link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css')
         script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+        script(src="http://malsup.github.com/jquery.form.js")
         script(src="/js/socket.io.js")
         script.
             $(function(){
                 var socket = io.connect('http://localhost:3000/');
                 socket.on('new-image', function(data) {
-                    console.log('new image from: ');
-                    console.log(data.user);
-                    // images.push(data.image);
                     var html = '';
 
                     html += "<li>"
@@ -25,12 +23,16 @@ html
                         allusers.push(users[i].text);
                     }
 
+                    console.log("All Users:");
+                    console.log(allusers);
+                    // console.log("Own user: " + {username});
+
                     if($.inArray(data.user, allusers) != -1) {
                         $('.image-list').append(html);
                     }
                 });
             });
-
+        link(rel='stylesheet', href='/css/style.css')
     body(ng-app='instagramclone' ng-controller="AppCtrl as app")
         .container
             .header

@@ -101,6 +101,8 @@ module.exports = function (passport) {
                             var username = email.slice(0, ind);
                             newUser.username = username;
 
+                            newUser.friends.push(newUser.username);
+
                             newUser.save(function (err) {
                                 if (err)
                                     throw err;
